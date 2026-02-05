@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Track - Track Every Meal. Eat Smart.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            primary: '#0a0a0f',
+                            secondary: '#12121a',
+                            card: '#1a1a24',
+                            hover: '#252532',
+                            border: '#2a2a3a'
+                        },
+                        accent: {
+                            DEFAULT: '#22c55e',
+                            hover: '#16a34a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+        
+        .transition-all-smooth {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="bg-dark-primary text-white font-sans min-h-screen">
+
+    <!-- Auth Page -->
+    <div id="auth-page" class="min-h-screen flex items-center justify-center p-5 bg-gradient-to-br from-dark-primary to-dark-secondary">
+        <div class="bg-dark-card border border-dark-border rounded-2xl p-8 sm:p-12 w-full max-w-md text-center shadow-2xl">
+            <!-- Logo -->
+            <div class="flex items-center justify-center gap-3 mb-2">
+                <span class="text-3xl">🥗</span>
+                <h1 class="text-2xl font-bold bg-gradient-to-r from-accent to-green-400 bg-clip-text text-transparent">
+                    Nutrition Track
+                </h1>
+            </div>
+            <p class="text-gray-400 text-sm mb-8">Track Every Meal. Eat Smart.</p>
+
+            <!-- Login Form -->
+            <div id="login-form" class="auth-form">
+                <h2 class="text-xl font-semibold mb-6">Welcome Back</h2>
+                <div class="mb-5 text-left">
+                    <label for="login-email" class="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                    <input type="email" id="login-email" placeholder="Enter your email"
+                        class="w-full px-4 py-3 bg-dark-secondary border border-dark-border rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all">
+                </div>
+                <div class="mb-5 text-left">
+                    <label for="login-password" class="block text-sm font-medium text-gray-400 mb-2">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password"
+                        class="w-full px-4 py-3 bg-dark-secondary border border-dark-border rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all">
+                </div>
+                <button id="login-btn"
+                    class="w-full py-3.5 bg-accent hover:bg-accent-hover text-black font-semibold rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/20">
+                    Login
+                </button>
+                <p class="mt-6 text-sm text-gray-400">
+                    Don't have an account? 
+                    <a href="#" id="show-signup" class="text-accent font-medium hover:underline">Create Account</a>
+                </p>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signup-form" class="auth-form hidden">
+                <h2 class="text-xl font-semibold mb-6">Create Account</h2>
+                <div class="mb-5 text-left">
+                    <label for="signup-name" class="block text-sm font-medium text-gray-400 mb-2">Full Name</label>
+                    <input type="text" id="signup-name" placeholder="Enter your name"
+                        class="w-full px-4 py-3 bg-dark-secondary border border-dark-border rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all">
+                </div>
+                <div class="mb-5 text-left">
+                    <label for="signup-email" class="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                    <input type="email" id="signup-email" placeholder="Enter your email"
+                        class="w-full px-4 py-3 bg-dark-secondary border border-dark-border rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all">
+                </div>
+                <div class="mb-5 text-left">
+                    <label for="signup-password" class="block text-sm font-medium text-gray-400 mb-2">Password</label>
+                    <input type="password" id="signup-password" placeholder="Create a password"
+                        class="w-full px-4 py-3 bg-dark-secondary border border-dark-border rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all">
+                </div>
+                <button id="signup-btn"
+                    class="w-full py-3.5 bg-accent hover:bg-accent-hover text-black font-semibold rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/20">
+                    Create Account
+                </button>
+                <p class="mt-6 text-sm text-gray-400">
+                    Already have an account? 
+                    <a href="#" id="show-login" class="text-accent font-medium hover:underline">Login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Page -->
+    <div id="main-page" class="hidden min-h-screen flex flex-col">
+        <!-- Navbar -->
+        <nav class="sticky top-0 z-50 flex items-center justify-between px-4 sm:px-8 py-4 bg-dark-primary/80 backdrop-blur-lg border-b border-dark-border">
+            <div class="flex items-center gap-2.5">
+                <span class="text-2xl">🥗</span>
+                <span class="text-lg font-bold hidden sm:inline">Nutrition Track</span>
+            </div>
+            <div class="flex items-center gap-4 sm:gap-6">
+                <a href="#" class="text-gray-400 font-medium hover:text-white transition-colors">Home</a>
+                <a href="#" class="text-gray-400 font-medium hover:text-white transition-colors">History</a>
+                <button id="logout-btn"
+                    class="px-4 py-2 border border-dark-border rounded-xl text-white font-medium hover:bg-dark-hover hover:border-gray-500 transition-all">
+                    Logout
+                </button>
+            </div>
+        </nav>
+
+        <!-- Greeting Section -->
+        <section class="px-4 sm:px-8 py-6 bg-dark-secondary">
+            <div id="greeting-container" class="max-w-4xl mx-auto opacity-0 translate-y-4 transition-all-smooth duration-500">
+                <h2 id="greeting-text" class="text-2xl sm:text-3xl font-bold"></h2>
+            </div>
+        </section>
+
+        <!-- Hero Section -->
+        <section class="text-center py-12 sm:py-16 px-4 bg-gradient-to-b from-dark-secondary to-dark-primary">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+                Track Every Meal.<br>
+                <span class="bg-gradient-to-r from-accent to-green-400 bg-clip-text text-transparent">Eat Smart.</span>
+            </h1>
+            <p class="text-lg text-gray-400 max-w-lg mx-auto">
+                Upload a photo of your meal and get instant nutrition insights powered by Google Cloud Vision AI.
+            </p>
+        </section>
+
+        <!-- Upload Section -->
+        <section class="py-10 px-4 sm:px-8">
+            <div class="max-w-lg mx-auto text-center">
+                <!-- Upload Box -->
+                <div id="upload-box"
+                    class="bg-dark-card border-2 border-dashed border-dark-border rounded-2xl p-12 sm:p-16 cursor-pointer hover:border-accent hover:bg-dark-hover transition-all">
+                    <div class="text-5xl mb-4">📷</div>
+                    <h3 class="text-xl font-semibold mb-2">Upload Food Image</h3>
+                    <p class="text-gray-400 text-sm">Drag and drop or click to select</p>
+                    <input type="file" id="file-input" accept="image/*" class="hidden">
+                </div>
+
+                <!-- Image Preview -->
+                <div id="image-preview" class="hidden bg-dark-card border border-dark-border rounded-2xl p-5 text-center">
+                    <img id="preview-img" src="" alt="Food preview" class="max-w-full max-h-72 rounded-xl mx-auto mb-4 object-contain">
+                    <button id="change-image"
+                        class="px-5 py-2.5 bg-dark-secondary border border-dark-border rounded-xl text-white font-medium hover:bg-dark-hover transition-all">
+                        Change Image
+                    </button>
+                </div>
+
+                <!-- Analyze Button -->
+                <button id="analyze-btn" disabled
+                    class="w-full mt-6 py-4 bg-accent hover:bg-accent-hover text-black font-semibold text-lg rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none flex items-center justify-center gap-2">
+                    <span id="analyze-text">Analyze Nutrition</span>
+                    <span id="analyze-loader" class="hidden w-5 h-5 border-2 border-transparent border-t-current rounded-full animate-spin"></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" class="hidden opacity-0 translate-y-4 transition-all-smooth duration-500 py-12 sm:py-16 px-4 bg-dark-secondary">
+            <div class="max-w-2xl mx-auto text-center">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-4">Nutrition Analysis</h2>
+                <div id="food-name" class="text-xl sm:text-2xl text-accent font-semibold mb-2">--</div>
+                <div id="detected-labels" class="text-sm text-gray-400 mb-8">Detected items: --</div>
+
+                <!-- Nutrition Grid -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-dark-card border border-dark-border rounded-xl p-5 sm:p-6 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-accent/10 transition-all">
+                        <div id="calories" class="text-3xl sm:text-4xl font-bold text-accent mb-2">--</div>
+                        <div class="text-sm text-gray-400 font-medium">Calories</div>
+                    </div>
+                    <div class="bg-dark-card border border-dark-border rounded-xl p-5 sm:p-6 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-accent/10 transition-all">
+                        <div id="protein" class="text-3xl sm:text-4xl font-bold text-accent mb-2">--</div>
+                        <div class="text-sm text-gray-400 font-medium">Protein (g)</div>
+                    </div>
+                    <div class="bg-dark-card border border-dark-border rounded-xl p-5 sm:p-6 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-accent/10 transition-all">
+                        <div id="carbs" class="text-3xl sm:text-4xl font-bold text-accent mb-2">--</div>
+                        <div class="text-sm text-gray-400 font-medium">Carbs (g)</div>
+                    </div>
+                    <div class="bg-dark-card border border-dark-border rounded-xl p-5 sm:p-6 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-accent/10 transition-all">
+                        <div id="fats" class="text-3xl sm:text-4xl font-bold text-accent mb-2">--</div>
+                        <div class="text-sm text-gray-400 font-medium">Fats (g)</div>
+                    </div>
+                </div>
+
+                <!-- Health Tip -->
+                <div class="bg-dark-card border border-dark-border border-l-4 border-l-accent rounded-xl p-5 text-left">
+                    <strong class="text-accent">Health Tip:</strong>
+                    <span id="tip-text" class="text-gray-300">--</span>
+                </div>
+
+                <!-- Confidence Badge -->
+                <div class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-dark-card border border-dark-border rounded-full text-sm">
+                    <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+                    <span class="text-gray-400">Analysis powered by Google Cloud Vision AI</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-dark-secondary text-gray-400 mt-auto border-t border-dark-border">
+            <div class="max-w-6xl mx-auto px-4 sm:px-8 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Branding -->
+                <div class="space-y-4">
+                    <h2 class="text-xl font-bold bg-gradient-to-r from-accent to-yellow-400 bg-clip-text text-transparent">
+                        🥗 Nutrition Track
+                    </h2>
+                    <p class="text-sm text-gray-400">
+                        Track every meal, eat smart, and stay healthy. Made with 💚 for all food lovers.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="space-y-2">
+                    <h3 class="font-semibold text-white mb-2">Quick Links</h3>
+                    <ul class="space-y-1">
+                        <li><a href="#" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">History</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Profile</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Settings</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact & Socials -->
+                <div class="space-y-2">
+                    <h3 class="font-semibold text-white mb-2">Contact & Follow</h3>
+                    <p class="text-sm">Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="83f0f6f3f3ecf1f7c3edf6f7f1eaf7eaecedf7f1e2e0e8ade0ecee">[email&#160;protected]</a></p>
+                    <div class="flex items-center gap-4 mt-2">
+                        <a href="#" class="hover:text-white transition-colors text-2xl">🐦</a>
+                        <a href="#" class="hover:text-white transition-colors text-2xl">📘</a>
+                        <a href="#" class="hover:text-white transition-colors text-2xl">📸</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="border-t border-dark-border mt-6 pt-4 text-center text-gray-500 text-sm">
+                                &copy; 2026 Nutrition Track. All rights reserved.
+            </div>
+        </footer>
+    </div> <!-- end main-page -->
+
+    <!-- ✅ LOAD APP JS (VERY IMPORTANT) -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+</html>

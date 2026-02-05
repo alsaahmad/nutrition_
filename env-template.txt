@@ -1,0 +1,7 @@
+# Copy this file and rename it to .env
+# Then replace the placeholder with your actual Google Cloud API key
+
+GOOGLE_CLOUD_API_KEY=your_api_key_here
+FLASK_APP=app.py
+FLASK_ENV=development
+FLASK_DEBUG=True
